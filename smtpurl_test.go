@@ -43,6 +43,18 @@ func TestParse(t *testing.T) {
 			smtp.CRAMMD5Auth("username", "password"),
 			false,
 		},
+		{
+			"smtp://username;AUTH=*@smtp.example.com",
+			"smtp.example.com:25",
+			nil,
+			false,
+		},
+		{
+			"smtp://;AUTH=ANONYMOUS@smtp.example.com",
+			"smtp.example.com:25",
+			nil,
+			false,
+		},
 	}
 	for _, tt := range tests {
 		gotServer, gotAuth, err := Parse(tt.raw)
