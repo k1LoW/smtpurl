@@ -45,6 +45,7 @@ func Parse(raw string) (string, smtp.Auth, error) {
 		case "CRAM-MD5":
 			pass, _ := u.User.Password()
 			auth = smtp.CRAMMD5Auth(su[0], pass)
+		case "ANONYMOUS", "*":
 		default:
 			return "", nil, fmt.Errorf("unsupported auth method: %s", strings.ToUpper(su[1]))
 		}
